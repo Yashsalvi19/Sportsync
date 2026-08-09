@@ -266,14 +266,18 @@ export const CoachDashboard = () => {
       </AnimatePresence>
 
       {/* ── Welcome Header ─────────────────────────────────────────── */}
-      <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-2xl bg-[#6C63FF]/20 border border-[#6C63FF]/30 flex items-center justify-center text-[#6C63FF] font-extrabold text-lg overflow-hidden">
-          {user?.user_metadata?.profile_pic_url ? (
-            <img src={user.user_metadata.profile_pic_url} alt="Profile" className="w-full h-full object-cover" />
-          ) : (
-            user?.user_metadata?.first_name?.charAt(0) || 'C'
-          )}
-        </div>
+      <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4">
+        <ProfileImageUpload 
+          user={user} 
+          onUploadSuccess={(url) => {
+            setToast({ message: "Profile picture updated successfully!", type: "success" });
+            // The browser will auto-update if we refresh, or we can just rely on the next session.
+            // A hard refresh will pull the new auth token if needed, but the image might show instantly if we update the DOM.
+            // For now, simple reload is safest to update the JWT across tabs.
+            setTimeout(() => window.location.reload(), 1500);
+          }}
+          onError={(err) => setToast({ message: err, type: "error" })}
+        />
         <div>
           <h1 className="text-3xl font-extrabold text-foreground tracking-tight">
             Coach Dashboard

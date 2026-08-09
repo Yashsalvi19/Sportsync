@@ -14,6 +14,9 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import apiClient from '../api/apiClient';
+import { supabase } from '../lib/supabase';
+import Skeleton from '../components/ui/Skeleton';
+import ProfileImageUpload from '../components/ProfileImageUpload';
 
 // ─── Mock Data for charts we haven't built APIs for yet ─────────
 const monthlyScores = [
@@ -272,14 +275,15 @@ export const StudentDashboard = () => {
 
       {/* ── Welcome Header ─────────────────────────────────────────── */}
       <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}>
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#7733D7]/20 border border-[#7733D7]/30 flex items-center justify-center text-[#9C57F3] font-extrabold text-lg overflow-hidden">
-            {user?.user_metadata?.profile_pic_url ? (
-              <img src={user.user_metadata.profile_pic_url} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              user?.user_metadata?.first_name?.charAt(0) || 'S'
-            )}
-          </div>
+        <div className="flex items-center gap-4">
+          <ProfileImageUpload 
+            user={user} 
+            onUploadSuccess={(url) => {
+              // Same as coach, just reload for now to see it instantly without complex state lifting
+              setTimeout(() => window.location.reload(), 1500);
+            }}
+            onError={(err) => alert(err)}
+          />
           <div>
             <h1 className="text-3xl font-extrabold text-foreground tracking-tight">
               Hey, {user?.user_metadata?.first_name || 'Student'} 👋

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import { supabase } from '../lib/supabase';
 import { User, Mail, ShieldCheck, MapPin, Phone, Award, Clock, Camera, Loader2, Save, X } from 'lucide-react';
+import ProfileImageUpload from '../components/ProfileImageUpload';
 
 export const Profile = () => {
   const user = useAuthStore((state) => state.user);
@@ -85,13 +86,15 @@ export const Profile = () => {
             className="glass-card p-6 flex flex-col items-center text-center"
           >
             <div className="relative group mb-4">
-              <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center border-4 border-background shadow-xl overflow-hidden transition-all group-hover:border-primary/50 block relative">
-                {avatarUrl ? (
-                  <img src={avatarUrl} alt="Profile" className="w-full h-full object-cover" />
-                ) : (
-                  <User className="w-12 h-12 text-primary" />
-                )}
-              </div>
+              <ProfileImageUpload 
+                user={user} 
+                onUploadSuccess={(url) => {
+                  setAvatarUrl(url);
+                  // Quick reload or rely on state updates
+                  // Since Profile page pulls avatarUrl state, it will update locally automatically!
+                }}
+                onError={(err) => alert(err)}
+              />
               <div className="absolute bottom-0 right-0 w-6 h-6 bg-success rounded-full border-2 border-background flex items-center justify-center pointer-events-none">
                 <ShieldCheck className="w-3 h-3 text-background" />
               </div>
@@ -111,13 +114,6 @@ export const Profile = () => {
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   placeholder="Last Name"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                />
-                <input 
-                  type="text" 
-                  value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)}
-                  placeholder="Profile Picture URL"
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
                 />
               </div>
