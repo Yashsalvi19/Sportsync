@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fac016cf-e8f9-4c80-9db9-971ed8dd4724" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3Gwi0T5rlnJ6PtryDKko4xyL25F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/SportSyncV3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fac016cf-e8f9-4c80-9db9-971ed8dd4724" name="Changes" comment="" />
+      <created>1784888841585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1784888841585</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/frontend/vite.config.js" />
+        <option value="$PROJECT_DIR$/frontend/vite.config.d.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/lib/api.js" />
+        <option value="$PROJECT_DIR$/frontend/src/store/authStore.js" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/CoachDashboard.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/routes/AppRoutes.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/AdminDashboard.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Tournaments.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Layout/Sidebar.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Layout/Navbar.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Coaches.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Layout/MainLayout.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Attendance.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Fees.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/Students.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/StudentDashboard.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/main.jsx" />
+        <option value="$PROJECT_DIR$/frontend/src/App.jsx" />
+      </list>
+    </option>
+  </component>
+</project>

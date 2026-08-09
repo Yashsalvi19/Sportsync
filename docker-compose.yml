@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: sportsync-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sportsync
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Automatically initialize schema on first run
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sportsync"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sportsync-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # Connect to the DB container using its service name
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sportsync
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JWT_SECRET=bXlzdXBlcnNlY3JldGtleXRoYXRtdXN0YmU1MTJiaXRzbG9uZzEyMzQ1Njc4kw==
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sportsync-frontend
+    ports:
+      - "5173:80" # Map 5173 on host to 80 in container to match our development port
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
