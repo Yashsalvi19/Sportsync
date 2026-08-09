@@ -44,12 +44,14 @@ public class AttendanceService {
                 Coach coach = coachRepository.findById(coachId)
                                 .orElseThrow(() -> new RuntimeException("Coach not found"));
 
-                Attendance attendance = Attendance.builder()
-                                .student(student)
-                                .sessionDate(dto.getSessionDate())
-                                .status(dto.getStatus())
-                                .markedBy(coach)
-                                .build();
+                Attendance attendance = attendanceRepository.findByStudentIdAndSessionDate(dto.getStudentId(), dto.getSessionDate())
+                                .orElse(Attendance.builder()
+                                                .student(student)
+                                                .sessionDate(dto.getSessionDate())
+                                                .build());
+                                                
+                attendance.setStatus(dto.getStatus());
+                attendance.setMarkedBy(coach);
 
                 return mapToDTO(attendanceRepository.save(attendance));
         }
