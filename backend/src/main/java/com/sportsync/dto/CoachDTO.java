@@ -20,4 +20,5 @@ public class CoachDTO {
     private String phone;
     private String specialization;
     private LocalDate hireDate;
+    private String profilePicUrl;
 }

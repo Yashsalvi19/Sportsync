@@ -21,4 +21,5 @@ public class StudentDTO {
     private LocalDate dateOfBirth;
     private String emergencyContact;
     private String coachName;
+    private String profilePicUrl;
 }

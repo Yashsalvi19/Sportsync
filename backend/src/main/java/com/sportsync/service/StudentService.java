@@ -53,7 +53,10 @@ public class StudentService {
                 .phone(student.getPhone())
                 .dateOfBirth(student.getDateOfBirth())
                 .emergencyContact(student.getEmergencyContact())
-                .coachName(student.getCoach() != null ? student.getCoach().getFirstName() + " " + student.getCoach().getLastName() : "Unassigned")
+                .profilePicUrl(student.getProfilePicUrl())
+                .coachName(student.getCoach() != null
+                                ? student.getCoach().getFirstName() + " "
+                                                + student.getCoach().getLastName() : "Unassigned")
                 .build();
     }
 }

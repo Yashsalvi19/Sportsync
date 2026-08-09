@@ -47,6 +47,7 @@ public class CoachService {
                 .phone(coach.getPhone())
                 .specialization(coach.getSpecialization())
                 .hireDate(coach.getHireDate())
+                .profilePicUrl(coach.getProfilePicUrl())
                 .build();
     }
 }
