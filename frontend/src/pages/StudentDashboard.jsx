@@ -15,7 +15,6 @@ import { AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import apiClient from '../api/apiClient';
 import { supabase } from '../lib/supabase';
-import Skeleton from '../components/ui/Skeleton';
 import ProfileImageUpload from '../components/ProfileImageUpload';
 
 // ─── Mock Data for charts we haven't built APIs for yet ─────────

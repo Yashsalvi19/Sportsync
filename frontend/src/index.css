@@ -6,13 +6,13 @@
   :root {
     --background: #0E0236;
     --foreground: #F5EFFC;
-    --card-bg: rgba(73, 36, 137, 0.4);
+    --card-bg: #0E0236; /* Match background for neumorphism */
   }
 
   .dark {
     --background: #000001;
     --foreground: #F5EFFC;
-    --card-bg: rgba(73, 36, 137, 0.3);
+    --card-bg: #000001; /* Match background for neumorphism */
   }
 
   html, body {
@@ -26,11 +26,13 @@
 }
 
 @layer components {
+  /* We keep the class name .glass-card so we don't break existing components, 
+     but we change its styles to be Neumorphic instead of Glassmorphic */
   .glass-card {
-    @apply bg-card backdrop-blur-md border border-white/10 shadow-glass dark:shadow-glass-dark rounded-2xl;
+    @apply bg-card shadow-neo dark:shadow-neo-dark rounded-2xl;
   }
   
   .btn-primary {
-    @apply bg-primary text-white font-medium px-4 py-2 rounded-xl shadow-lg shadow-primary/30 hover:bg-primary-600 transition-all active:scale-95;
+    @apply bg-primary text-white font-medium px-4 py-2 rounded-xl shadow-neo-primary hover:bg-primary-600 transition-all active:shadow-neo-primary-inset active:scale-[0.98];
   }
 }

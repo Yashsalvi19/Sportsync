@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Camera, Loader2 } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
-import apiClient from '../../lib/apiClient';
+import { supabase } from '../lib/supabase';
+import apiClient from '../api/apiClient';
 
 export default function ProfileImageUpload({ user, onUploadSuccess, onError }) {
   const fileInputRef = useRef(null);

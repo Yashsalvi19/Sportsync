@@ -31,8 +31,14 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
-        'glass-dark': '0 4px 30px rgba(0, 0, 0, 0.5)',
+        'neo': '8px 8px 16px rgba(0, 0, 0, 0.6), -8px -8px 16px rgba(255, 255, 255, 0.05)',
+        'neo-dark': '8px 8px 16px rgba(0, 0, 0, 0.9), -8px -8px 16px rgba(255, 255, 255, 0.02)',
+        'neo-sm': '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(255, 255, 255, 0.05)',
+        'neo-sm-dark': '4px 4px 8px rgba(0, 0, 0, 0.9), -4px -4px 8px rgba(255, 255, 255, 0.02)',
+        'neo-inset': 'inset 6px 6px 12px rgba(0, 0, 0, 0.6), inset -6px -6px 12px rgba(255, 255, 255, 0.05)',
+        'neo-inset-dark': 'inset 6px 6px 12px rgba(0, 0, 0, 0.9), inset -6px -6px 12px rgba(255, 255, 255, 0.02)',
+        'neo-primary': '5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(119, 51, 215, 0.3)',
+        'neo-primary-inset': 'inset 4px 4px 8px rgba(0, 0, 0, 0.4), inset -4px -4px 8px rgba(156, 87, 243, 0.4)',
       },
       backdropBlur: {
         'md': '10px',
