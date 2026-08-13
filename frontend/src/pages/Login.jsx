@@ -102,7 +102,7 @@ export const Login = () => {
       >
         <motion.div 
           layout
-          className="w-full max-w-md bg-white/80 dark:bg-[#0B1220]/80 md:bg-transparent md:dark:bg-transparent backdrop-blur-2xl md:backdrop-blur-none p-6 sm:p-10 md:p-0 rounded-3xl md:rounded-none shadow-2xl md:shadow-none border border-white/30 dark:border-white/10 md:border-transparent"
+          className="w-full max-w-md p-6 sm:p-10 md:p-0"
         >
           {/* Mobile Only Header (Since the big overlay is hidden on mobile) */}
           <div className="md:hidden flex flex-col items-center mb-8">
