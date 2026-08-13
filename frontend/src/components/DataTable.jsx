@@ -63,8 +63,8 @@ export const DataTable = ({ columns, data, onEdit, onDelete }) => {
       <div className="flex items-center justify-between mt-4 text-sm text-foreground/60">
         <p>Showing {data.length} entries</p>
         <div className="flex items-center space-x-2">
-          <button className="p-1 rounded-md hover:bg-black/10 dark:bg-white/10 disabled:opacity-50"><ChevronLeft className="w-4 h-4" /></button>
-          <button className="p-1 rounded-md hover:bg-black/10 dark:bg-white/10 disabled:opacity-50"><ChevronRight className="w-4 h-4" /></button>
+          <button className="p-1 rounded-md hover:bg-black/10 dark:hover:bg-white/10 disabled:opacity-50"><ChevronLeft className="w-4 h-4" /></button>
+          <button className="p-1 rounded-md hover:bg-black/10 dark:hover:bg-white/10 disabled:opacity-50"><ChevronRight className="w-4 h-4" /></button>
         </div>
       </div>
     </div>

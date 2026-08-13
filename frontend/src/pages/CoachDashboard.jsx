@@ -13,6 +13,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import apiClient from '../api/apiClient';
 import { useAuthStore } from '../store/authStore';
+import ProfileImageUpload from '../components/ProfileImageUpload';
 
 // ------------ Animation Variants ------------
 const containerVariants = {
@@ -321,7 +322,7 @@ export const CoachDashboard = () => {
                       key={opt.value}
                       onClick={() => handleAttendanceChange(student.id, opt.value)}
                       className={`flex-1 py-1.5 rounded-md text-xs font-bold transition-all ${
-                        student.attendance === opt.value ? opt.activeClass : `hover:bg-black/10 dark:bg-white/10 ${opt.textClass}`
+                        student.attendance === opt.value ? opt.activeClass : `hover:bg-black/10 dark:hover:bg-white/10 ${opt.textClass}`
                       }`}
                     >
                       {opt.label}
@@ -509,7 +510,7 @@ export const CoachDashboard = () => {
               <div className="flex gap-3">
                 <button 
                   onClick={() => setShowConfirmDialog(false)}
-                  className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors"
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
                   Cancel
                 </button>
@@ -583,7 +584,7 @@ export const CoachDashboard = () => {
                   <button 
                     type="button"
                     onClick={() => setShowAddFeeModal(false)}
-                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors"
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                   >
                     Cancel
                   </button>

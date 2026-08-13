@@ -60,7 +60,7 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
               className={`flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-medium ${
                 isActive
                   ? 'bg-primary/15 text-primary'
-                  : 'text-foreground/70 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 hover:text-foreground'
+                  : 'text-foreground/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground'
               }`}
             >
               <Icon className={`w-5 h-5 mr-3 flex-shrink-0 transition-colors ${
@@ -111,7 +111,7 @@ export const Sidebar = ({ mobileOpen, onClose }) => {
             >
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-xl hover:bg-black/10 dark:hover:bg-black/10 dark:bg-white/10 transition-colors text-foreground/70"
+                className="absolute top-4 right-4 p-2 rounded-xl hover:bg-black/10 dark:hover:bg-white/10 transition-colors text-foreground/70"
               >
                 <X className="w-5 h-5" />
               </button>
