@@ -83,12 +83,12 @@ export const Signup = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white/10 backdrop-blur-xl border border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
+            className="bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
-              <Activity className="w-8 h-8 text-white" />
+              <Activity className="w-8 h-8 text-foreground" />
             </div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-4">SportSync</h1>
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight mb-4">SportSync</h1>
             <p className="text-[#DBC2FA] text-lg text-center max-w-sm font-medium leading-relaxed">
               Join the elite sports academy platform.
             </p>
@@ -132,7 +132,7 @@ export const Signup = () => {
                   <input 
                     type="text" 
                     {...register('firstName')}
-                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                    className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                     placeholder="John"
                   />
                 </div>
@@ -148,7 +148,7 @@ export const Signup = () => {
                   <input 
                     type="text" 
                     {...register('lastName')}
-                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                    className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                     placeholder="Doe"
                   />
                 </div>
@@ -165,7 +165,7 @@ export const Signup = () => {
                 <input 
                   type="email" 
                   {...register('email')}
-                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                   placeholder="student@sportsync.com"
                 />
               </div>
@@ -181,7 +181,7 @@ export const Signup = () => {
                 <input 
                   type="password" 
                   {...register('password')}
-                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -195,13 +195,13 @@ export const Signup = () => {
               <div className="flex gap-4">
                 <label className="flex-1 cursor-pointer">
                   <input type="radio" value="STUDENT" {...register('role')} className="peer sr-only" />
-                  <div className="text-center py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all peer-checked:bg-[#7733D7]/10 peer-checked:border-[#7733D7] peer-checked:text-[#7733D7] dark:peer-checked:text-[#DBC2FA]">
+                  <div className="text-center py-2.5 rounded-xl border border-slate-200 dark:border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all peer-checked:bg-[#7733D7]/10 peer-checked:border-[#7733D7] peer-checked:text-[#7733D7] dark:peer-checked:text-[#DBC2FA]">
                     Student
                   </div>
                 </label>
                 <label className="flex-1 cursor-pointer">
                   <input type="radio" value="COACH" {...register('role')} className="peer sr-only" />
-                  <div className="text-center py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all peer-checked:bg-[#7733D7]/10 peer-checked:border-[#7733D7] peer-checked:text-[#7733D7] dark:peer-checked:text-[#DBC2FA]">
+                  <div className="text-center py-2.5 rounded-xl border border-slate-200 dark:border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all peer-checked:bg-[#7733D7]/10 peer-checked:border-[#7733D7] peer-checked:text-[#7733D7] dark:peer-checked:text-[#DBC2FA]">
                     Coach
                   </div>
                 </label>

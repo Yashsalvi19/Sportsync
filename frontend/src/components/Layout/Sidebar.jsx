@@ -38,7 +38,7 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="h-20 flex items-center px-6 border-b border-white/10 flex-shrink-0">
+      <div className="h-20 flex items-center px-6 border-b border-black/10 dark:border-black/10 dark:border-white/10 flex-shrink-0">
         <img
           src="/logo.png"
           alt="SportSync Logo"
@@ -60,7 +60,7 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
               className={`flex items-center px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-medium ${
                 isActive
                   ? 'bg-primary/15 text-primary'
-                  : 'text-foreground/70 hover:bg-white/5 hover:text-foreground'
+                  : 'text-foreground/70 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 hover:text-foreground'
               }`}
             >
               <Icon className={`w-5 h-5 mr-3 flex-shrink-0 transition-colors ${
@@ -72,7 +72,7 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
         })}
       </nav>
 
-      <div className="p-3 border-t border-white/10 flex-shrink-0">
+      <div className="p-3 border-t border-black/10 dark:border-black/10 dark:border-white/10 flex-shrink-0">
         <button 
           onClick={handleLogout}
           className="flex items-center w-full px-4 py-3 rounded-xl text-danger/80 hover:bg-danger/10 hover:text-danger transition-colors text-sm font-medium"
@@ -89,7 +89,7 @@ export const Sidebar = ({ mobileOpen, onClose }) => {
   return (
     <>
       {/* Desktop */}
-      <aside className="w-64 h-screen hidden md:flex flex-col bg-card backdrop-blur-md border-r border-white/10 fixed left-0 top-0 z-30">
+      <aside className="w-64 h-screen hidden md:flex flex-col bg-card backdrop-blur-md border-r border-black/10 dark:border-black/10 dark:border-white/10 fixed left-0 top-0 z-30">
         <SidebarContent />
       </aside>
 
@@ -107,11 +107,11 @@ export const Sidebar = ({ mobileOpen, onClose }) => {
               key="drawer"
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed left-0 top-0 h-full w-72 bg-[#0E0236] border-r border-white/10 z-50 flex flex-col md:hidden"
+              className="fixed left-0 top-0 h-full w-72 bg-card border-r border-black/10 dark:border-black/10 dark:border-white/10 z-50 flex flex-col md:hidden"
             >
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 transition-colors text-foreground/70"
+                className="absolute top-4 right-4 p-2 rounded-xl hover:bg-black/10 dark:hover:bg-black/10 dark:bg-white/10 transition-colors text-foreground/70"
               >
                 <X className="w-5 h-5" />
               </button>

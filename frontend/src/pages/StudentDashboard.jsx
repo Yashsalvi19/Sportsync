@@ -62,7 +62,7 @@ const cardVariants = {
 // ─── Skeleton Loader ──────────────────────────────────────────────────────────
 
 const Skeleton = ({ className = '' }) => (
-  <div className={`animate-pulse bg-white/10 rounded-xl ${className}`} />
+  <div className={`animate-pulse bg-black/10 dark:bg-white/10 rounded-xl ${className}`} />
 );
 
 // ─── Custom Tooltip ───────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ const Skeleton = ({ className = '' }) => (
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#0E0236]/95 backdrop-blur-xl border border-white/10 rounded-xl p-3 shadow-2xl">
+    <div className="bg-card/95 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl p-3 shadow-2xl">
       {label && <p className="text-xs font-semibold text-foreground/50 mb-1">{label}</p>}
       {payload.map((p, i) => (
         <p key={i} className="text-sm font-bold" style={{ color: p.color || p.fill }}>
@@ -85,7 +85,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const FeeCard = ({ fee, onPayClick }) => {
   if (!fee) return (
-    <motion.div variants={cardVariants} className={`glass-card p-6 border border-white/10 relative overflow-hidden flex items-center justify-center`}>
+    <motion.div variants={cardVariants} className={`glass-card p-6 border border-black/10 dark:border-white/10 relative overflow-hidden flex items-center justify-center`}>
       <p className="text-foreground/50">No upcoming fees</p>
     </motion.div>
   );
@@ -118,7 +118,7 @@ const FeeCard = ({ fee, onPayClick }) => {
       {(fee.status === 'OVERDUE' || fee.status === 'PENDING') && (
         <button
           onClick={onPayClick}
-          className="mt-4 w-full py-2.5 rounded-xl text-sm font-bold text-white transition-all active:scale-[0.98] shadow-lg"
+          className="mt-4 w-full py-2.5 rounded-xl text-sm font-bold text-foreground transition-all active:scale-[0.98] shadow-lg"
           style={{ background: `linear-gradient(135deg, ${cfg.color}cc, ${cfg.color})`, boxShadow: `0 8px 24px ${cfg.color}40` }}>
           Pay Now →
         </button>
@@ -137,7 +137,7 @@ const TournamentCard = ({ t }) => {
   }[t.status] || {};
 
   return (
-    <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-white/10">
+    <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-black/5 dark:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-black/10 dark:border-white/10">
       <div className="w-10 h-10 rounded-xl bg-[#7733D7]/20 flex items-center justify-center flex-shrink-0 border border-[#7733D7]/30">
         <Trophy className="w-5 h-5 text-[#9C57F3]" />
       </div>
@@ -464,7 +464,7 @@ export const StudentDashboard = () => {
           {tournamentsData?.length > 0 ? (
             tournamentsData.map((t, idx) => <TournamentCard key={idx} t={t} />)
           ) : (
-            <div className="py-8 text-center text-foreground/40 text-sm font-semibold border border-dashed border-white/10 rounded-xl">
+            <div className="py-8 text-center text-foreground/40 text-sm font-semibold border border-dashed border-black/10 dark:border-white/10 rounded-xl">
               No upcoming tournaments found
             </div>
           )}
@@ -482,19 +482,19 @@ export const StudentDashboard = () => {
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-sm bg-[#0E0236] border border-white/10 rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center"
+              className="relative w-full max-w-sm bg-card border border-black/10 dark:border-white/10 rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center"
             >
               <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-lg p-3">
                 <img src="/gpay.png" alt="Google Pay" className="w-full h-full object-contain" />
 
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2">Pay via GPay</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Pay via GPay</h3>
               <p className="text-sm text-foreground/70 mb-6">
-                Please send the exact amount of <span className="font-bold text-white">₹{latestFee?.amount || 0}</span> to the academy's official GPay number:
+                Please send the exact amount of <span className="font-bold text-foreground">₹{latestFee?.amount || 0}</span> to the academy's official GPay number:
               </p>
 
-              <div className="bg-black/30 border border-white/10 rounded-xl py-4 px-6 w-full mb-6">
+              <div className="bg-black/30 border border-black/10 dark:border-white/10 rounded-xl py-4 px-6 w-full mb-6">
                 <p className="text-3xl font-extrabold tracking-widest text-[#22C55E] drop-shadow-md">
                   +91 98765 43210
                 </p>
@@ -507,7 +507,7 @@ export const StudentDashboard = () => {
                 </p>
                 <button
                   onClick={() => setShowGPayModal(false)}
-                  className="w-full py-3 rounded-xl font-bold text-white bg-white/10 hover:bg-white/20 transition-all border border-white/10"
+                  className="w-full py-3 rounded-xl font-bold text-foreground bg-black/10 dark:bg-white/10 hover:bg-white/20 transition-all border border-black/10 dark:border-white/10"
                 >
                   Close
                 </button>

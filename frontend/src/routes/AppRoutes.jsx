@@ -26,7 +26,7 @@ const ProtectedRoute = ({ children }) => {
 
 export const AppRoutes = () => {
   const { user, isInitialized } = useAuthStore();
-  const currentUserRole = user?.user_metadata?.role || 'STUDENT';
+  const currentUserRole = (user?.user_metadata?.role || 'STUDENT').toUpperCase();
 
   if (!isInitialized) {
     return (

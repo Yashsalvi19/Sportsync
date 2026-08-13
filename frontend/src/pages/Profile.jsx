@@ -107,14 +107,14 @@ export const Profile = () => {
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   placeholder="First Name"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                  className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
                 />
                 <input 
                   type="text" 
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   placeholder="Last Name"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                  className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none"
                 />
               </div>
             ) : (
@@ -151,7 +151,7 @@ export const Profile = () => {
                   <button 
                     onClick={() => setIsEditing(false)} 
                     disabled={isSaving}
-                    className="w-full py-2.5 rounded-xl border border-white/10 text-foreground/70 hover:bg-white/5 transition-colors text-sm font-semibold flex justify-center items-center gap-2"
+                    className="w-full py-2.5 rounded-xl border border-black/10 dark:border-white/10 text-foreground/70 hover:bg-black/5 dark:bg-white/5 transition-colors text-sm font-semibold flex justify-center items-center gap-2"
                   >
                     <X className="w-4 h-4" /> Cancel
                   </button>
@@ -178,17 +178,17 @@ export const Profile = () => {
                 Student Information
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Assigned Coach</p>
                   <p className="font-medium">Sarah Jenkins (Tennis)</p>
                 </div>
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Current Level</p>
                   <p className="font-medium text-success flex items-center">
                     Advanced
                   </p>
                 </div>
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5 sm:col-span-2">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5 sm:col-span-2">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Emergency Contact</p>
                   <div className="flex justify-between items-center mt-1">
                     <p className="font-medium">Mr. Johnson (Father)</p>
@@ -211,17 +211,17 @@ export const Profile = () => {
                 Coach Details
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Specialization</p>
                   <p className="font-medium">Tennis / Advanced</p>
                 </div>
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Joined Date</p>
                   <p className="font-medium flex items-center">
                     Jan 15, 2023
                   </p>
                 </div>
-                <div className="bg-background/50 p-4 rounded-xl border border-white/5 sm:col-span-2">
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5 sm:col-span-2">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Bio</p>
                   <p className="text-sm font-medium mt-1 text-foreground/80 leading-relaxed">
                     Former national level tennis player with over 8 years of coaching experience. 
@@ -243,12 +243,12 @@ export const Profile = () => {
                 <ShieldCheck className="w-5 h-5 mr-2 text-primary" />
                 Admin Privileges
               </h3>
-              <div className="bg-background/50 p-4 rounded-xl border border-white/5 space-y-3">
-                 <div className="flex justify-between items-center py-2 border-b border-white/5">
+              <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5 space-y-3">
+                 <div className="flex justify-between items-center py-2 border-b border-black/5 dark:border-white/5">
                     <span className="text-sm font-medium">Manage Users</span>
                     <span className="text-xs font-bold text-success bg-success/10 px-2 py-1 rounded-md">Full Access</span>
                  </div>
-                 <div className="flex justify-between items-center py-2 border-b border-white/5">
+                 <div className="flex justify-between items-center py-2 border-b border-black/5 dark:border-white/5">
                     <span className="text-sm font-medium">Financial Records</span>
                     <span className="text-xs font-bold text-success bg-success/10 px-2 py-1 rounded-md">Full Access</span>
                  </div>
@@ -275,7 +275,7 @@ export const Profile = () => {
             <div className="space-y-4">
               {[1, 2, 3].map((_, i) => (
                 <div key={i} className="flex items-start">
-                  <div className="w-2 h-2 mt-2 rounded-full bg-primary mr-4 relative before:absolute before:top-3 before:left-1/2 before:-translate-x-1/2 before:w-[1px] before:h-10 before:bg-white/10 last:before:hidden" />
+                  <div className="w-2 h-2 mt-2 rounded-full bg-primary mr-4 relative before:absolute before:top-3 before:left-1/2 before:-translate-x-1/2 before:w-[1px] before:h-10 before:bg-black/10 dark:bg-white/10 last:before:hidden" />
                   <div>
                     <p className="text-sm font-medium">Logged in from new device</p>
                     <p className="text-xs text-foreground/50 mt-0.5">{i + 1} day{i > 0 ? 's' : ''} ago • Mumbai, IN</p>

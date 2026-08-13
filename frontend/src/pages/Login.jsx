@@ -60,12 +60,12 @@ export const Login = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white/10 backdrop-blur-xl border border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
+            className="bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
-              <Activity className="w-8 h-8 text-white" />
+              <Activity className="w-8 h-8 text-foreground" />
             </div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-4">SportSync</h1>
+            <h1 className="text-4xl font-extrabold text-foreground tracking-tight mb-4">SportSync</h1>
             <p className="text-[#DBC2FA] text-lg text-center max-w-sm font-medium leading-relaxed">
               Empowering academies with elite management tools, from court to cloud.
             </p>
@@ -108,7 +108,7 @@ export const Login = () => {
                 <input 
                   type="email" 
                   {...register('email')}
-                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                   placeholder="admin@sportsync.com"
                 />
               </div>
@@ -124,7 +124,7 @@ export const Login = () => {
                 <input 
                   type="password" 
                   {...register('password')}
-                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-white placeholder:text-slate-400"
+                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -138,11 +138,11 @@ export const Login = () => {
                 <div className="relative flex items-center">
                   <input type="checkbox" className="peer sr-only" />
                   <div className="w-4 h-4 rounded border-2 border-slate-300 dark:border-slate-600 peer-checked:bg-[#7733D7] peer-checked:border-[#7733D7] transition-colors" />
-                  <svg className="absolute w-3 h-3 left-0.5 top-0.5 pointer-events-none opacity-0 peer-checked:opacity-100 text-white" viewBox="0 0 14 14" fill="none">
+                  <svg className="absolute w-3 h-3 left-0.5 top-0.5 pointer-events-none opacity-0 peer-checked:opacity-100 text-foreground" viewBox="0 0 14 14" fill="none">
                     <path d="M3 8L6 11L11 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400 ml-2 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Remember for 30 days</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400 ml-2 group-hover:text-slate-900 dark:group-hover:text-foreground transition-colors">Remember for 30 days</span>
               </label>
               <a href="#" className="text-sm font-semibold text-[#7733D7] hover:text-[#9C57F3] transition-colors">Forgot password?</a>
             </div>

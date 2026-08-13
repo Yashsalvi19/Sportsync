@@ -73,7 +73,7 @@ export default function ProfileImageUpload({ user, onUploadSuccess, onError }) {
         
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {isUploading ? <Loader2 className="w-5 h-5 text-white animate-spin" /> : <Camera className="w-5 h-5 text-white" />}
+          {isUploading ? <Loader2 className="w-5 h-5 text-foreground animate-spin" /> : <Camera className="w-5 h-5 text-foreground" />}
         </div>
       </div>
       

@@ -44,7 +44,7 @@ const cohortPerformanceData = [
 // ------------ Helper Components ------------
 
 const Skeleton = ({ className = '' }) => (
-  <div className={`animate-pulse bg-white/10 rounded-xl ${className}`} />
+  <div className={`animate-pulse bg-black/10 dark:bg-white/10 rounded-xl ${className}`} />
 );
 
 // Toast System
@@ -67,7 +67,7 @@ const Toast = ({ message, type = 'success', onClose }) => {
       className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3 rounded-xl border backdrop-blur-xl ${bg} ${border} shadow-2xl`}
     >
       <Icon className={`w-5 h-5 ${color}`} />
-      <p className="text-sm font-semibold text-white">{message}</p>
+      <p className="text-sm font-semibold text-foreground">{message}</p>
     </motion.div>
   );
 };
@@ -257,7 +257,7 @@ export const CoachDashboard = () => {
   }
 
   // Double check protection just in case
-  if (user?.user_metadata?.role?.toUpperCase() !== 'COACH') return null;
+  if (!user || user.user_metadata?.role?.toUpperCase() !== 'COACH') return null;
 
   return (
     <div className="space-y-8 pb-10">
@@ -294,14 +294,14 @@ export const CoachDashboard = () => {
         <motion.div variants={cardVariants} className="glass-card p-6 border-l-4 border-l-[#6C63FF]">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-[#6C63FF]" /> Log Today's Session
               </h2>
               <p className="text-sm text-foreground/50 mt-1">Review and lock in attendance for {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric'})}</p>
             </div>
             <button 
               onClick={() => setShowConfirmDialog(true)}
-              className="bg-[#6C63FF] hover:bg-[#5a52d5] text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all active:scale-95"
+              className="bg-[#6C63FF] hover:bg-[#5a52d5] text-foreground px-5 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all active:scale-95"
             >
               Submit Attendance
             </button>
@@ -309,8 +309,8 @@ export const CoachDashboard = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {attendanceData.map(student => (
-              <div key={student.id} className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between">
-                <p className="font-semibold text-white mb-3 text-sm truncate">{student.name}</p>
+              <div key={student.id} className="bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-4 flex flex-col justify-between">
+                <p className="font-semibold text-foreground mb-3 text-sm truncate">{student.name}</p>
                 <div className="flex gap-1 bg-black/20 p-1 rounded-lg">
                   {[
                     { label: 'P', value: 'PRESENT', activeClass: 'bg-emerald-500 text-white', textClass: 'text-emerald-500' },
@@ -321,7 +321,7 @@ export const CoachDashboard = () => {
                       key={opt.value}
                       onClick={() => handleAttendanceChange(student.id, opt.value)}
                       className={`flex-1 py-1.5 rounded-md text-xs font-bold transition-all ${
-                        student.attendance === opt.value ? opt.activeClass : `hover:bg-white/10 ${opt.textClass}`
+                        student.attendance === opt.value ? opt.activeClass : `hover:bg-black/10 dark:bg-white/10 ${opt.textClass}`
                       }`}
                     >
                       {opt.label}
@@ -340,7 +340,7 @@ export const CoachDashboard = () => {
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="lg:col-span-2 space-y-6">
           <motion.div variants={cardVariants} className="glass-card p-6 flex flex-col h-[400px]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <Target className="w-5 h-5 text-[#6C63FF]" /> Roster Command Center
               </h2>
               <div className="relative">
@@ -350,7 +350,7 @@ export const CoachDashboard = () => {
                   placeholder="Search athletes..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-black/20 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50 transition-colors w-full sm:w-64"
+                  className="bg-black/20 border border-black/10 dark:border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-foreground placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50 transition-colors w-full sm:w-64"
                 />
               </div>
             </div>
@@ -359,9 +359,9 @@ export const CoachDashboard = () => {
               <table className="w-full text-left border-collapse">
                 <thead className="sticky top-0 bg-[#0B1220]/95 backdrop-blur-md z-10">
                   <tr>
-                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-white/10">Athlete Name</th>
-                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-white/10">Status</th>
-                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-white/10 text-right">Action</th>
+                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-black/10 dark:border-white/10">Athlete Name</th>
+                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-black/10 dark:border-white/10">Status</th>
+                    <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-black/10 dark:border-white/10 text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -371,8 +371,8 @@ export const CoachDashboard = () => {
                     </tr>
                   ) : (
                     filteredRoster.map(student => (
-                      <tr key={student.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
-                        <td className="py-3 text-sm font-medium text-white">{student.name}</td>
+                      <tr key={student.id} className="border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:bg-white/5 transition-colors group">
+                        <td className="py-3 text-sm font-medium text-foreground">{student.name}</td>
                         <td className="py-3">
                           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
                             student.status === 'ACTIVE' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
@@ -399,7 +399,7 @@ export const CoachDashboard = () => {
           <motion.div variants={cardVariants} className="glass-card p-6">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="font-bold text-white flex items-center gap-2">
+                <h3 className="font-bold text-foreground flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-[#6C63FF]" /> Cohort Performance
                 </h3>
                 <p className="text-xs text-foreground/50 mt-1">Average assessment scores (6 mo)</p>
@@ -432,7 +432,7 @@ export const CoachDashboard = () => {
           <motion.div variants={cardVariants} className="glass-card p-6 h-[400px] flex flex-col border border-red-500/20 relative overflow-hidden">
              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" />
             <div className="flex items-center justify-between mb-4 relative z-10">
-              <h3 className="font-bold text-white flex items-center gap-2">
+              <h3 className="font-bold text-foreground flex items-center gap-2">
                 <AlertCircle className="w-5 h-5 text-red-500" /> Pending Fees Action
               </h3>
               <button
@@ -444,9 +444,9 @@ export const CoachDashboard = () => {
             </div>
             <div className="flex-1 overflow-auto pr-2 space-y-3 custom-scrollbar relative z-10">
               {pendingFeesStudents.map(student => (
-                <div key={student.id} className="bg-black/30 p-3 rounded-xl border border-white/5 flex items-center justify-between">
+                <div key={student.id} className="bg-black/30 p-3 rounded-xl border border-black/5 dark:border-white/5 flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-white">{student.name}</p>
+                    <p className="text-sm font-semibold text-foreground">{student.name}</p>
                     <p className={`text-[10px] font-bold mt-0.5 ${student.feeStatus === 'OVERDUE' ? 'text-red-400' : 'text-amber-400'}`}>
                       {student.feeStatus} - ₹{student.fee.amount}
                     </p>
@@ -464,7 +464,7 @@ export const CoachDashboard = () => {
                       disabled={sendingSms === student.id}
                       className={`p-2 rounded-lg transition-all ${
                         sendingSms === student.id 
-                          ? 'bg-white/10 text-white/50 cursor-not-allowed' 
+                          ? 'bg-black/10 dark:bg-white/10 text-foreground/50 cursor-not-allowed' 
                           : 'bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300'
                       }`}
                       title="Send SMS Reminder"
@@ -497,25 +497,25 @@ export const CoachDashboard = () => {
             />
             <motion.div 
               variants={modalVariants} initial="hidden" animate="visible" exit="exit"
-              className="relative w-full max-w-sm bg-[#0E0236] border border-white/10 rounded-2xl p-6 shadow-2xl"
+              className="relative w-full max-w-sm bg-card border border-black/10 dark:border-white/10 rounded-2xl p-6 shadow-2xl"
             >
               <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-4 border border-emerald-500/20">
                 <CheckCircle2 className="w-6 h-6 text-emerald-500" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Lock Attendance?</h3>
+              <h3 className="text-xl font-bold text-foreground mb-2">Lock Attendance?</h3>
               <p className="text-sm text-foreground/60 mb-6">
                 Are you sure you want to submit the attendance for today's session? This action will update student records.
               </p>
               <div className="flex gap-3">
                 <button 
                   onClick={() => setShowConfirmDialog(false)}
-                  className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-white/5 hover:bg-white/10 transition-colors"
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors"
                 >
                   Cancel
                 </button>
                 <button 
                   onClick={submitAttendance}
-                  className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-emerald-500 hover:bg-emerald-600 shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all"
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-emerald-500 hover:bg-emerald-600 shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all"
                 >
                   Confirm
                 </button>
@@ -536,9 +536,9 @@ export const CoachDashboard = () => {
             />
             <motion.div 
               variants={modalVariants} initial="hidden" animate="visible" exit="exit"
-              className="relative w-full max-w-sm bg-[#0E0236] border border-white/10 rounded-2xl p-6 shadow-2xl"
+              className="relative w-full max-w-sm bg-card border border-black/10 dark:border-white/10 rounded-2xl p-6 shadow-2xl"
             >
-              <h3 className="text-xl font-bold text-white mb-4">Add New Fee</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4">Add New Fee</h3>
               <form onSubmit={handleAddFee} className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold mb-1.5 text-[#DBC2FA]">Student</label>
@@ -546,7 +546,7 @@ export const CoachDashboard = () => {
                     value={feeStudentId}
                     onChange={(e) => setFeeStudentId(e.target.value)}
                     required
-                    className="w-full bg-black/20 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-[#6C63FF]/50"
                   >
                     <option value="" disabled className="bg-[#0B1220] text-foreground/50">Select student</option>
                     {students.map(s => (
@@ -566,7 +566,7 @@ export const CoachDashboard = () => {
                     min="1"
                     step="1"
                     placeholder="e.g. 1500"
-                    className="w-full bg-black/20 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50"
                   />
                 </div>
                 <div>
@@ -576,21 +576,21 @@ export const CoachDashboard = () => {
                     value={feeDueDate}
                     onChange={(e) => setFeeDueDate(e.target.value)}
                     required
-                    className="w-full bg-black/20 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-[#6C63FF]/50"
                   />
                 </div>
                 <div className="flex gap-3 pt-4">
                   <button 
                     type="button"
                     onClick={() => setShowAddFeeModal(false)}
-                    className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-white/5 hover:bg-white/10 transition-colors"
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors"
                   >
                     Cancel
                   </button>
                   <button 
                     type="submit"
                     disabled={addingFee}
-                    className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-[#6C63FF] hover:bg-[#5a52d5] shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all flex items-center justify-center disabled:opacity-70"
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-[#6C63FF] hover:bg-[#5a52d5] shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all flex items-center justify-center disabled:opacity-70"
                   >
                     {addingFee ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Add Fee'}
                   </button>
