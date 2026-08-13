@@ -67,7 +67,7 @@ export const Login = () => {
       >
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay transition-all duration-1000"
-          style={{ backgroundImage: loginType === 'COACH' ? 'url("/coach-bg.jpg")' : 'url("/cricket-academy.png")' }} 
+          style={{ backgroundImage: loginType === 'COACH' ? 'url("/coach-bg.png")' : 'url("/cricket-academy.png")' }} 
         />
         
         {/* Glassmorphic Overlay with Branding */}
