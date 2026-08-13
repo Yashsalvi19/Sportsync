@@ -20,12 +20,8 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  *, ::before, ::after {
-    @apply transition-colors duration-500 ease-in-out;
-  }
-
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
 }
 
@@ -33,7 +29,7 @@
   /* We keep the class name .glass-card so we don't break existing components, 
      but we change its styles to be Neumorphic instead of Glassmorphic */
   .glass-card {
-    @apply bg-card shadow-neo dark:shadow-neo-dark rounded-2xl;
+    @apply bg-card shadow-neo dark:shadow-neo-dark rounded-2xl transition-colors duration-300;
   }
   
   .btn-primary {

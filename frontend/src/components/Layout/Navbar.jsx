@@ -67,7 +67,7 @@ export const Navbar = ({ onMenuClick }) => {
   const unreadCount = notifications.filter(n => !n.is_read).length;
 
   return (
-    <header className="h-16 md:h-20 bg-background/70 backdrop-blur-xl border-b border-black/10 dark:border-white/10 sticky top-0 z-20 flex items-center justify-between px-4 md:px-8 gap-4">
+    <header className="h-16 md:h-20 bg-background/70 backdrop-blur-xl border-b border-black/10 dark:border-white/10 sticky top-0 z-20 flex items-center justify-between px-4 md:px-8 gap-4 transition-colors duration-300">
       <div className="flex items-center gap-4">
         <button
           onClick={onMenuClick}
