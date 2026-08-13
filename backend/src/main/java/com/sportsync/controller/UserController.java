@@ -19,9 +19,9 @@ public class UserController {
     public ResponseEntity<ApiResponse<Void>> updateProfilePicture(@RequestBody Map<String, String> payload) {
         String url = payload.get("url");
         if (url == null || url.isEmpty()) {
-            return ResponseEntity.badRequest().body(new ApiResponse<>(false, "URL is required", null));
+            return ResponseEntity.badRequest().body(ApiResponse.error("URL is required"));
         }
         userService.updateProfilePicture(url);
-        return ResponseEntity.ok(new ApiResponse<>(true, "Profile picture updated successfully", null));
+        return ResponseEntity.ok(ApiResponse.success("Profile picture updated successfully", null));
     }
 }
