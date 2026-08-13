@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { MainLayout } from '../components/Layout/MainLayout.jsx';
-import { AdminDashboard } from '../pages/AdminDashboard.jsx';
+
 import { CoachDashboard } from '../pages/CoachDashboard.jsx';
 import { StudentDashboard } from '../pages/StudentDashboard.jsx';
 import { Students } from '../pages/Students.jsx';
@@ -47,8 +47,7 @@ export const AppRoutes = () => {
         <Route index element={<Navigate to="/dashboard" replace />} />
         
         <Route path="dashboard" element={
-          currentUserRole === 'ADMIN' ? <AdminDashboard /> :
-          currentUserRole === 'COACH' ? <CoachDashboard /> :
+          (currentUserRole === 'ADMIN' || currentUserRole === 'COACH') ? <CoachDashboard /> :
           <StudentDashboard />
         } />
 
