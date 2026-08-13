@@ -137,8 +137,8 @@ const TournamentCard = ({ t }) => {
   }[t.status] || {};
 
   return (
-    <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-black/5 dark:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-black/10 dark:border-white/10">
-      <div className="w-10 h-10 rounded-xl bg-[#7733D7]/20 flex items-center justify-center flex-shrink-0 border border-[#7733D7]/30">
+    <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors group cursor-pointer border border-transparent hover:border-black/10 dark:hover:border-white/10">
+      <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/30">
         <Trophy className="w-5 h-5 text-[#9C57F3]" />
       </div>
       <div className="flex-1 min-w-0">
@@ -477,7 +477,7 @@ export const StudentDashboard = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[#0B1220]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
               onClick={() => setShowGPayModal(false)}
             />
             <motion.div
@@ -494,7 +494,7 @@ export const StudentDashboard = () => {
                 Please send the exact amount of <span className="font-bold text-foreground">₹{latestFee?.amount || 0}</span> to the academy's official GPay number:
               </p>
 
-              <div className="bg-black/30 border border-black/10 dark:border-white/10 rounded-xl py-4 px-6 w-full mb-6">
+              <div className="bg-black/5 dark:bg-black/30 border border-black/10 dark:border-white/10 rounded-xl py-4 px-6 w-full mb-6">
                 <p className="text-3xl font-extrabold tracking-widest text-[#22C55E] drop-shadow-md">
                   +91 98765 43210
                 </p>
@@ -507,7 +507,7 @@ export const StudentDashboard = () => {
                 </p>
                 <button
                   onClick={() => setShowGPayModal(false)}
-                  className="w-full py-3 rounded-xl font-bold text-foreground bg-black/10 dark:bg-white/10 hover:bg-white/20 transition-all border border-black/10 dark:border-white/10"
+                  className="w-full py-3 rounded-xl font-bold text-foreground bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-all border border-black/10 dark:border-white/10"
                 >
                   Close
                 </button>

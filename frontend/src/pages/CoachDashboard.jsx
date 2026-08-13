@@ -302,7 +302,7 @@ export const CoachDashboard = () => {
             </div>
             <button 
               onClick={() => setShowConfirmDialog(true)}
-              className="bg-[#6C63FF] hover:bg-[#5a52d5] text-foreground px-5 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all active:scale-95"
+              className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all active:scale-95"
             >
               Submit Attendance
             </button>
@@ -351,14 +351,14 @@ export const CoachDashboard = () => {
                   placeholder="Search athletes..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-black/20 border border-black/10 dark:border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-foreground placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50 transition-colors w-full sm:w-64"
+                  className="bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl pl-9 pr-4 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 transition-colors w-full sm:w-64"
                 />
               </div>
             </div>
             
             <div className="flex-1 overflow-auto pr-2 custom-scrollbar">
               <table className="w-full text-left border-collapse">
-                <thead className="sticky top-0 bg-[#0B1220]/95 backdrop-blur-md z-10">
+                <thead className="sticky top-0 bg-background/95 backdrop-blur-md z-10">
                   <tr>
                     <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-black/10 dark:border-white/10">Athlete Name</th>
                     <th className="py-3 text-xs font-semibold text-foreground/50 border-b border-black/10 dark:border-white/10">Status</th>
@@ -412,9 +412,9 @@ export const CoachDashboard = () => {
                 <XAxis dataKey="month" stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} domain={[50, 100]} axisLine={false} tickLine={false} />
                 <Tooltip 
-                  cursor={{ fill: 'rgba(255,255,255,0.03)', radius: 8 }}
-                  contentStyle={{ backgroundColor: '#0B1220', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}
-                  itemStyle={{ color: '#fff', fontWeight: 'bold' }}
+                  cursor={{ fill: 'rgba(128,128,128,0.1)', radius: 8 }}
+                  contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}
+                  itemStyle={{ color: 'var(--foreground)', fontWeight: 'bold' }}
                 />
                 <Bar dataKey="score" name="Avg Score" radius={[6, 6, 0, 0]}>
                   {cohortPerformanceData.map((entry, idx) => (
@@ -445,7 +445,7 @@ export const CoachDashboard = () => {
             </div>
             <div className="flex-1 overflow-auto pr-2 space-y-3 custom-scrollbar relative z-10">
               {pendingFeesStudents.map(student => (
-                <div key={student.id} className="bg-black/30 p-3 rounded-xl border border-black/5 dark:border-white/5 flex items-center justify-between">
+                <div key={student.id} className="bg-black/5 dark:bg-black/30 p-3 rounded-xl border border-black/5 dark:border-white/5 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold text-foreground">{student.name}</p>
                     <p className={`text-[10px] font-bold mt-0.5 ${student.feeStatus === 'OVERDUE' ? 'text-red-400' : 'text-amber-400'}`}>
@@ -493,7 +493,7 @@ export const CoachDashboard = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-[#0B1220]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
               onClick={() => setShowConfirmDialog(false)}
             />
             <motion.div 
@@ -516,7 +516,7 @@ export const CoachDashboard = () => {
                 </button>
                 <button 
                   onClick={submitAttendance}
-                  className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-emerald-500 hover:bg-emerald-600 shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all"
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-emerald-500 hover:bg-emerald-600 shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all"
                 >
                   Confirm
                 </button>
@@ -532,7 +532,7 @@ export const CoachDashboard = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} 
-              className="absolute inset-0 bg-[#0B1220]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
               onClick={() => setShowAddFeeModal(false)}
             />
             <motion.div 
@@ -542,23 +542,23 @@ export const CoachDashboard = () => {
               <h3 className="text-xl font-bold text-foreground mb-4">Add New Fee</h3>
               <form onSubmit={handleAddFee} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold mb-1.5 text-[#DBC2FA]">Student</label>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Student</label>
                   <select 
                     value={feeStudentId}
                     onChange={(e) => setFeeStudentId(e.target.value)}
                     required
-                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   >
-                    <option value="" disabled className="bg-[#0B1220] text-foreground/50">Select student</option>
+                    <option value="" disabled className="text-foreground/50">Select student</option>
                     {students.map(s => (
-                      <option key={s.id} value={s.id} className="bg-[#0B1220]">
+                      <option key={s.id} value={s.id} className="bg-background text-foreground">
                         {s.firstName} {s.lastName}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-1.5 text-[#DBC2FA]">Amount (₹)</label>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Amount (₹)</label>
                   <input 
                     type="number" 
                     value={feeAmount}
@@ -567,17 +567,17 @@ export const CoachDashboard = () => {
                     min="1"
                     step="1"
                     placeholder="e.g. 1500"
-                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-white/40 focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-1.5 text-[#DBC2FA]">Due Date</label>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Due Date</label>
                   <input 
                     type="date" 
                     value={feeDueDate}
                     onChange={(e) => setFeeDueDate(e.target.value)}
                     required
-                    className="w-full bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-[#6C63FF]/50"
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   />
                 </div>
                 <div className="flex gap-3 pt-4">
@@ -591,7 +591,7 @@ export const CoachDashboard = () => {
                   <button 
                     type="submit"
                     disabled={addingFee}
-                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-[#6C63FF] hover:bg-[#5a52d5] shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all flex items-center justify-center disabled:opacity-70"
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(108,99,255,0.3)] transition-all flex items-center justify-center disabled:opacity-70"
                   >
                     {addingFee ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Add Fee'}
                   </button>
