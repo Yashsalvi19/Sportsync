@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { supabase } from '../lib/supabase';
-import { useAuthStore } from '../store/authStore';
 
 // Explicit Zod schema definition
 const loginSchema = z.object({
@@ -16,6 +15,7 @@ const loginSchema = z.object({
 
 export const Login = () => {
   const [globalError, setGlobalError] = useState('');
+  const [loginType, setLoginType] = useState('STUDENT');
   const navigate = useNavigate();
 
   const {
@@ -30,12 +30,25 @@ export const Login = () => {
     setGlobalError('');
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       });
 
       if (error) throw error;
+
+      // Role Validation Based on Selected Slider
+      const role = (authData.user?.user_metadata?.role || 'STUDENT').toUpperCase();
+      
+      if (loginType === 'COACH' && role !== 'COACH' && role !== 'ADMIN') {
+        await supabase.auth.signOut();
+        throw new Error("Access denied: You are not registered as a Coach.");
+      }
+      
+      if (loginType === 'STUDENT' && role === 'COACH') {
+        await supabase.auth.signOut();
+        throw new Error("Please use the Coach login portal.");
+      }
 
       navigate('/dashboard');
     } catch (err) {
@@ -48,10 +61,9 @@ export const Login = () => {
       
       {/* Visual Split - High Res Background with Glassmorphic Overlay */}
       <div className="hidden md:flex md:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#492489] to-[#0E0236]">
-        {/* Placeholder for high-res editorial image - replace with actual image URL */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-          style={{ backgroundImage: 'url("/cricket-academy.png")' }} 
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay transition-all duration-1000"
+          style={{ backgroundImage: loginType === 'COACH' ? 'url("/coach-bg.jpg")' : 'url("/cricket-academy.png")' }} 
         />
         
         {/* Glassmorphic Overlay with Branding */}
@@ -81,9 +93,39 @@ export const Login = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="w-full max-w-md"
         >
+          {/* Slider Toggle */}
+          <div className="flex bg-black/5 dark:bg-white/5 p-1.5 rounded-xl mb-10 relative w-full max-w-[280px] mx-auto md:mx-0 shadow-inner border border-black/5 dark:border-white/5">
+            {['STUDENT', 'COACH'].map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => {
+                  setLoginType(type);
+                  setGlobalError('');
+                }}
+                className={`flex-1 relative py-2.5 text-sm font-bold z-10 transition-colors ${
+                  loginType === type ? 'text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                }`}
+              >
+                {type === 'STUDENT' ? 'Student Login' : 'Coach Login'}
+                {loginType === type && (
+                  <motion.div
+                    layoutId="loginTypePill"
+                    className="absolute inset-0 bg-[#7733D7] rounded-lg -z-10 shadow-md"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
           <div className="mb-10 text-center md:text-left">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-[#F5EFFC] tracking-tight">Welcome back</h2>
-            <p className="text-slate-500 dark:text-[#BA8AF5] mt-2 font-medium text-sm">Please enter your details to sign in.</p>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-[#F5EFFC] tracking-tight">
+              {loginType === 'STUDENT' ? 'Welcome Athlete' : 'Welcome Coach'}
+            </h2>
+            <p className="text-slate-500 dark:text-[#BA8AF5] mt-2 font-medium text-sm">
+              Please enter your details to sign in.
+            </p>
           </div>
 
           <AnimatePresence>
@@ -108,8 +150,8 @@ export const Login = () => {
                 <input 
                   type="email" 
                   {...register('email')}
-                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
-                  placeholder="admin@sportsync.com"
+                  className="w-full bg-white dark:bg-black/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
+                  placeholder={loginType === 'STUDENT' ? "athlete@sportsync.com" : "coach@sportsync.com"}
                 />
               </div>
               {errors.email && (
@@ -124,7 +166,7 @@ export const Login = () => {
                 <input 
                   type="password" 
                   {...register('password')}
-                  className="w-full bg-white dark:bg-black/5 dark:bg-white/5 border border-slate-200 dark:border-black/10 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
+                  className="w-full bg-white dark:bg-black/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#7733D7]/50 focus:border-[#7733D7] transition-all text-sm text-slate-900 dark:text-foreground placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
               </div>
