@@ -456,9 +456,9 @@ export const CoachDashboard = () => {
             </div>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={cohortPerformanceData} barSize={32}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                <XAxis dataKey="month" stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} domain={[50, 100]} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} vertical={false} />
+                <XAxis dataKey="month" stroke="currentColor" opacity={0.5} tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis stroke="currentColor" opacity={0.5} tick={{ fontSize: 11 }} domain={[50, 100]} axisLine={false} tickLine={false} />
                 <Tooltip 
                   cursor={{ fill: 'rgba(128,128,128,0.1)', radius: 8 }}
                   contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}

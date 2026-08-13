@@ -332,7 +332,7 @@ export const StudentDashboard = () => {
         <motion.div variants={cardVariants} className="glass-card p-6 flex items-center gap-5">
           <div className="relative w-20 h-20 flex-shrink-0">
             <svg viewBox="0 0 36 36" className="w-20 h-20 -rotate-90">
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="3.5" />
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="currentColor" className="text-foreground" opacity={0.08} strokeWidth="3.5" />
               <circle cx="18" cy="18" r="15.9" fill="none" stroke={pctColor}
                 strokeWidth="3.5" strokeDasharray={`${attendancePct}, 100`}
                 strokeLinecap="round" style={{ filter: `drop-shadow(0 0 4px ${pctColor})` }} />
@@ -379,9 +379,9 @@ export const StudentDashboard = () => {
           </div>
           <ResponsiveContainer width="100%" height={180}>
             <RadialBarChart innerRadius="60%" outerRadius="90%" data={[{ value: attendancePct, fill: pctColor }]} startAngle={90} endAngle={-270}>
-              <RadialBar background={{ fill: 'rgba(255,255,255,0.05)' }} dataKey="value" cornerRadius={8} />
-              <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="fill-white font-extrabold" fontSize={28} fontWeight={800}>{attendancePct}%</text>
-              <text x="50%" y="62%" textAnchor="middle" dominantBaseline="middle" fill="rgba(255,255,255,0.4)" fontSize={11}>Attendance</text>
+              <RadialBar background={{ fill: 'currentColor', opacity: 0.05 }} className="text-foreground" dataKey="value" cornerRadius={8} />
+              <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground font-extrabold" fontSize={28} fontWeight={800}>{attendancePct}%</text>
+              <text x="50%" y="62%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground/50" fontSize={11}>Attendance</text>
             </RadialBarChart>
           </ResponsiveContainer>
           <div className="w-full flex justify-between text-xs text-foreground/50 mt-2">
@@ -404,10 +404,10 @@ export const StudentDashboard = () => {
             <div style={{ minWidth: `${Math.max(60 * (datewiseScores?.length || 0), 300)}px`, height: '185px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={datewiseScores} barSize={28}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(156, 163, 175, 0.1)" vertical={false} />
-                  <XAxis dataKey="date" stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} domain={[0, 100]} axisLine={false} tickLine={false} />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(156, 163, 175, 0.05)', radius: 8 }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} vertical={false} />
+                  <XAxis dataKey="date" stroke="currentColor" opacity={0.5} tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis stroke="currentColor" opacity={0.5} tick={{ fontSize: 11 }} domain={[0, 100]} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'currentColor', opacity: 0.05, radius: 8 }} />
                   <Bar dataKey="score" name="Score" radius={[6, 6, 0, 0]}>
                     {datewiseScores.map((entry, idx) => (
                       <Cell key={idx} fill={entry.score >= 90 ? '#22C55E' : entry.score >= 75 ? '#9C57F3' : entry.score > 0 ? '#F59E0B' : 'rgba(156, 163, 175, 0.1)'} />
