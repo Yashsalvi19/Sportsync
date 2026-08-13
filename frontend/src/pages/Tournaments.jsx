@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { DataTable } from '../components/DataTable';
 import { Trophy, Plus, X, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import apiClient from '../lib/apiClient';
+import api from '../lib/api';
 import { useAuthStore } from '../store/authStore';
 
 export const Tournaments = () => {
@@ -24,14 +24,14 @@ export const Tournaments = () => {
   const { data: tournaments, isLoading } = useQuery({
     queryKey: ['tournaments'],
     queryFn: async () => {
-      const response = await apiClient.get('/tournaments');
+      const response = await api.get('/tournaments');
       return response.data.data;
     },
   });
 
   const createMutation = useMutation({
     mutationFn: async (newTournament) => {
-      const response = await apiClient.post('/tournaments', newTournament);
+      const response = await api.post('/tournaments', newTournament);
       return response.data.data;
     },
     onSuccess: () => {
