@@ -88,7 +88,14 @@ export const Signup = () => {
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
               <Activity className="w-8 h-8 text-foreground" />
             </div>
-            <h1 className="text-4xl font-extrabold text-foreground tracking-tight mb-4">SportSync</h1>
+            <motion.h1 
+              className="text-4xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#9C57F3] to-[#22C55E]"
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 200%" }}
+            >
+              SportSync
+            </motion.h1>
             <p className="text-[#DBC2FA] text-lg text-center max-w-sm font-medium leading-relaxed">
               Join the elite sports academy platform.
             </p>

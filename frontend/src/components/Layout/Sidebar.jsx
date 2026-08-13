@@ -39,13 +39,22 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
   return (
     <div className="flex flex-col h-full">
       <div className="h-20 flex items-center px-6 border-b border-black/10 dark:border-black/10 dark:border-white/10 flex-shrink-0">
-        <img
+        <motion.img
           src="/logo.png"
           alt="SportSync Logo"
           className="w-8 h-8 object-contain mr-3"
+          animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           onError={(e) => { e.target.style.display = 'none'; }}
         />
-        <h1 className="text-xl font-bold tracking-wide text-foreground">SportSync</h1>
+        <motion.h1 
+          className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#9C57F3] to-[#22C55E]"
+          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          style={{ backgroundSize: "200% 200%" }}
+        >
+          SportSync
+        </motion.h1>
       </div>
 
       <nav className="flex-1 overflow-y-auto py-6 px-3 space-y-1">

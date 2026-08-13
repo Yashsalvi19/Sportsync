@@ -79,7 +79,14 @@ export const Login = () => {
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
               <Activity className="w-8 h-8 text-foreground" />
             </div>
-            <h1 className="text-4xl font-extrabold text-foreground tracking-tight mb-4">SportSync</h1>
+            <motion.h1 
+              className="text-4xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#9C57F3] to-[#22C55E]"
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 200%" }}
+            >
+              SportSync
+            </motion.h1>
             <p className="text-[#DBC2FA] text-lg text-center max-w-sm font-medium leading-relaxed">
               Empowering academies with elite management tools, from court to cloud.
             </p>
@@ -102,7 +109,14 @@ export const Login = () => {
             <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-3 border border-primary/30 shadow-inner">
               <Activity className="w-6 h-6 text-foreground" />
             </div>
-            <h1 className="text-2xl font-extrabold text-foreground tracking-tight">SportSync</h1>
+            <motion.h1 
+              className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#9C57F3] to-[#22C55E]"
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 200%" }}
+            >
+              SportSync
+            </motion.h1>
           </div>
           {/* Slider Toggle */}
           <div className="flex bg-black/5 dark:bg-white/5 p-1.5 rounded-xl mb-10 relative w-full max-w-[280px] mx-auto md:mx-0 shadow-inner border border-black/5 dark:border-white/5">
