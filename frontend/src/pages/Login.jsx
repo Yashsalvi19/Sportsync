@@ -57,13 +57,13 @@ export const Login = () => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${loginType === 'STUDENT' ? 'md:flex-row' : 'md:flex-row-reverse'} font-sans overflow-hidden bg-[#F8FAFC] dark:bg-[#0B1220]`}>
+    <div className={`min-h-screen relative flex flex-col ${loginType === 'STUDENT' ? 'md:flex-row' : 'md:flex-row-reverse'} font-sans overflow-hidden bg-black`}>
       
       {/* Visual Split - High Res Background with Glassmorphic Overlay */}
       <motion.div 
         layout
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="hidden md:flex md:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#492489] to-[#0E0236]"
+        className="absolute inset-0 z-0 md:relative md:w-1/2 overflow-hidden bg-gradient-to-br from-[#492489] to-[#0E0236]"
       >
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay transition-all duration-1000"
@@ -74,7 +74,7 @@ export const Login = () => {
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-12">
           <motion.div 
             layout
-            className="bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
+            className="hidden md:flex bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex-col items-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
               <Activity className="w-8 h-8 text-foreground" />
@@ -91,12 +91,19 @@ export const Login = () => {
       <motion.div 
         layout
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="w-full md:w-1/2 flex items-center justify-center p-8 relative"
+        className="w-full md:w-1/2 flex items-center justify-center p-4 sm:p-8 relative z-10 min-h-screen md:min-h-0 md:bg-[#F8FAFC] md:dark:bg-[#0B1220]"
       >
         <motion.div 
           layout
-          className="w-full max-w-md"
+          className="w-full max-w-md bg-white/80 dark:bg-[#0B1220]/80 md:bg-transparent md:dark:bg-transparent backdrop-blur-2xl md:backdrop-blur-none p-6 sm:p-10 md:p-0 rounded-3xl md:rounded-none shadow-2xl md:shadow-none border border-white/30 dark:border-white/10 md:border-transparent"
         >
+          {/* Mobile Only Header (Since the big overlay is hidden on mobile) */}
+          <div className="md:hidden flex flex-col items-center mb-8">
+            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-3 border border-primary/30 shadow-inner">
+              <Activity className="w-6 h-6 text-foreground" />
+            </div>
+            <h1 className="text-2xl font-extrabold text-foreground tracking-tight">SportSync</h1>
+          </div>
           {/* Slider Toggle */}
           <div className="flex bg-black/5 dark:bg-white/5 p-1.5 rounded-xl mb-10 relative w-full max-w-[280px] mx-auto md:mx-0 shadow-inner border border-black/5 dark:border-white/5">
             {['STUDENT', 'COACH'].map((type) => (
