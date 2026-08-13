@@ -85,7 +85,7 @@ export const Signup = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
+            <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
               <Activity className="w-8 h-8 text-foreground" />
             </div>
             <motion.h1 

@@ -76,7 +76,7 @@ export const Login = () => {
             layout
             className="hidden md:flex bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex-col items-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
+            <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
               <Activity className="w-8 h-8 text-foreground" />
             </div>
             <motion.h1 
@@ -106,7 +106,7 @@ export const Login = () => {
         >
           {/* Mobile Only Header (Since the big overlay is hidden on mobile) */}
           <div className="md:hidden flex flex-col items-center mb-8">
-            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-3 border border-primary/30 shadow-inner">
+            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-3 border border-primary/30 shadow-inner">
               <Activity className="w-6 h-6 text-foreground" />
             </div>
             <motion.h1 

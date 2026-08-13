@@ -42,7 +42,7 @@ const SidebarContent = ({ onLinkClick = () => {} }) => {
         <motion.img
           src="/logo.png"
           alt="SportSync Logo"
-          className="w-8 h-8 object-contain mr-3"
+          className="w-9 h-9 object-cover rounded-full bg-white/10 border border-white/20 mr-3 shadow-md"
           animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           onError={(e) => { e.target.style.display = 'none'; }}
