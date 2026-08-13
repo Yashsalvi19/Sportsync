@@ -25,19 +25,19 @@ public class TournamentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COACH')")
     public ResponseEntity<ApiResponse<TournamentDTO>> createTournament(@RequestBody TournamentDTO dto) {
         return ResponseEntity.ok(ApiResponse.success("Tournament created", tournamentService.createTournament(dto)));
     }
     
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COACH')")
     public ResponseEntity<ApiResponse<TournamentDTO>> updateTournament(@PathVariable UUID id, @RequestBody TournamentDTO dto) {
         return ResponseEntity.ok(ApiResponse.success("Tournament updated", tournamentService.updateTournament(id, dto)));
     }
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COACH')")
     public ResponseEntity<ApiResponse<Void>> deleteTournament(@PathVariable UUID id) {
         tournamentService.deleteTournament(id);
         return ResponseEntity.ok(ApiResponse.success("Tournament deleted", null));
