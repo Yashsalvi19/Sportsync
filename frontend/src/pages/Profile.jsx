@@ -32,6 +32,8 @@ export const Profile = () => {
   const [formData, setFormData] = useState({
     firstName: displayUser.firstName || '',
     lastName: displayUser.lastName || '',
+    phone: displayUser.user_metadata?.phone || '',
+    bio: displayUser.user_metadata?.bio || '',
   });
 
   useEffect(() => {
@@ -39,6 +41,8 @@ export const Profile = () => {
       setFormData({
         firstName: user.user_metadata?.first_name || '',
         lastName: user.user_metadata?.last_name || '',
+        phone: user.user_metadata?.phone || '',
+        bio: user.user_metadata?.bio || '',
       });
       setAvatarUrl(user.user_metadata?.profile_pic_url || '');
     }
@@ -51,6 +55,8 @@ export const Profile = () => {
         data: {
           first_name: formData.firstName,
           last_name: formData.lastName,
+          phone: formData.phone,
+          bio: formData.bio,
           profile_pic_url: avatarUrl
         }
       });
@@ -129,7 +135,17 @@ export const Profile = () => {
               </div>
               <div className="flex items-center text-sm">
                 <Phone className="w-4 h-4 mr-3 text-foreground/50" />
-                <span className="text-foreground/80">+91 98765 43210</span>
+                {isEditing ? (
+                  <input 
+                    type="text" 
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    placeholder="+91 98765 43210"
+                    className="flex-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-2 py-1 text-sm focus:border-primary focus:outline-none"
+                  />
+                ) : (
+                  <span className="text-foreground/80">{displayUser.user_metadata?.phone || '+91 98765 43210'}</span>
+                )}
               </div>
               <div className="flex items-center text-sm">
                 <MapPin className="w-4 h-4 mr-3 text-foreground/50" />
@@ -195,6 +211,22 @@ export const Profile = () => {
                     <p className="text-sm font-medium opacity-80">+91 99999 88888</p>
                   </div>
                 </div>
+                <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5 sm:col-span-2">
+                  <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Bio</p>
+                  {isEditing ? (
+                    <textarea 
+                      value={formData.bio}
+                      onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                      placeholder="Tell us about your sports journey..."
+                      className="w-full mt-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none resize-none"
+                      rows={3}
+                    />
+                  ) : (
+                    <p className="text-sm font-medium mt-1 text-foreground/80 leading-relaxed">
+                      {displayUser.user_metadata?.bio || "Passionate athlete currently training in Advanced Tennis. Working towards participating in the national championships."}
+                    </p>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}
@@ -223,10 +255,19 @@ export const Profile = () => {
                 </div>
                 <div className="bg-background/50 p-4 rounded-xl border border-black/5 dark:border-white/5 sm:col-span-2">
                   <p className="text-xs text-foreground/50 mb-1 uppercase tracking-wider font-semibold">Bio</p>
-                  <p className="text-sm font-medium mt-1 text-foreground/80 leading-relaxed">
-                    Former national level tennis player with over 8 years of coaching experience. 
-                    Specializes in technical refinement and mental conditioning for competitive tournaments.
-                  </p>
+                  {isEditing ? (
+                    <textarea 
+                      value={formData.bio}
+                      onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                      placeholder="Share your coaching experience..."
+                      className="w-full mt-1 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm focus:border-primary focus:outline-none resize-none"
+                      rows={3}
+                    />
+                  ) : (
+                    <p className="text-sm font-medium mt-1 text-foreground/80 leading-relaxed">
+                      {displayUser.user_metadata?.bio || "Former national level tennis player with over 8 years of coaching experience. Specializes in technical refinement and mental conditioning for competitive tournaments."}
+                    </p>
+                  )}
                 </div>
               </div>
             </motion.div>
