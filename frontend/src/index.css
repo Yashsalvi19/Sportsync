@@ -20,8 +20,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  *, ::before, ::after {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground;
   }
 }
 
