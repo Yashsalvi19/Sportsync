@@ -20,18 +20,18 @@ public class AssessmentController {
     @PostMapping
     public ResponseEntity<ApiResponse<AssessmentDTO>> createAssessment(@RequestBody AssessmentDTO dto) {
         AssessmentDTO created = assessmentService.createAssessment(dto);
-        return ResponseEntity.ok(ApiResponse.success(created, "Assessment created successfully"));
+        return ResponseEntity.ok(ApiResponse.success("Assessment created successfully", created));
     }
 
     @GetMapping("/student/{studentId}")
     public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsForStudent(@PathVariable UUID studentId) {
         List<AssessmentDTO> assessments = assessmentService.getAssessmentsForStudent(studentId);
-        return ResponseEntity.ok(ApiResponse.success(assessments, "Assessments retrieved successfully"));
+        return ResponseEntity.ok(ApiResponse.success("Assessments retrieved successfully", assessments));
     }
 
     @GetMapping("/coach/{coachId}")
     public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsByCoach(@PathVariable UUID coachId) {
         List<AssessmentDTO> assessments = assessmentService.getAssessmentsByCoach(coachId);
-        return ResponseEntity.ok(ApiResponse.success(assessments, "Assessments retrieved successfully"));
+        return ResponseEntity.ok(ApiResponse.success("Assessments retrieved successfully", assessments));
     }
 }
