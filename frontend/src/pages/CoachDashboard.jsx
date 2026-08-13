@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users, Calendar, TrendingUp, CheckCircle2, MessageSquare,
   X, Clock, ChevronRight, Activity, Target, AlertCircle,
-  Search, Loader2, Send
+  Search, Loader2, Send, ClipboardList
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
@@ -98,6 +98,15 @@ export const CoachDashboard = () => {
   const [feeDueDate, setFeeDueDate] = useState('');
   const [addingFee, setAddingFee] = useState(false);
 
+  // Assessment State
+  const [showAssessmentModal, setShowAssessmentModal] = useState(false);
+  const [assessmentStudentId, setAssessmentStudentId] = useState('');
+  const [assessmentTitle, setAssessmentTitle] = useState('');
+  const [assessmentScore, setAssessmentScore] = useState('');
+  const [assessmentMaxScore, setAssessmentMaxScore] = useState('100');
+  const [assessmentFeedback, setAssessmentFeedback] = useState('');
+  const [addingAssessment, setAddingAssessment] = useState(false);
+
   // Strict Route Protection
   useEffect(() => {
     if (!user) {
@@ -130,8 +139,19 @@ export const CoachDashboard = () => {
     retry: false
   });
 
+  const { data: assessmentsResponse } = useQuery({
+    queryKey: ['coachAssessments', user?.id],
+    queryFn: async () => {
+      if (!user?.id) return [];
+      const res = await apiClient.get(`/assessments/coach/${user.id}`);
+      return res.data.data;
+    },
+    enabled: !!user?.id
+  });
+
   const students = studentsResponse || [];
   const allFees = feesResponse || [];
+  const assessments = assessmentsResponse || [];
 
   const handleAddFee = async (e) => {
     e.preventDefault();
@@ -156,6 +176,34 @@ export const CoachDashboard = () => {
       setToast({ message: "Failed to add fee", type: "error" });
     } finally {
       setAddingFee(false);
+    }
+  };
+
+  const handleAddAssessment = async (e) => {
+    e.preventDefault();
+    if (!assessmentStudentId || !assessmentTitle || !assessmentScore || !assessmentMaxScore) return;
+    
+    setAddingAssessment(true);
+    try {
+      await apiClient.post('/assessments', {
+        studentId: assessmentStudentId,
+        coachId: user.id,
+        title: assessmentTitle,
+        score: parseFloat(assessmentScore),
+        maxScore: parseFloat(assessmentMaxScore),
+        feedback: assessmentFeedback
+      });
+      setToast({ message: "Assessment assigned successfully!", type: "success" });
+      setShowAssessmentModal(false);
+      setAssessmentStudentId('');
+      setAssessmentTitle('');
+      setAssessmentScore('');
+      setAssessmentMaxScore('100');
+      setAssessmentFeedback('');
+    } catch (err) {
+      setToast({ message: "Failed to assign assessment", type: "error" });
+    } finally {
+      setAddingAssessment(false);
     }
   };
 
@@ -424,6 +472,47 @@ export const CoachDashboard = () => {
               </BarChart>
             </ResponsiveContainer>
           </motion.div>
+
+          {/* ── Recent Assessments ───────────────────────────────── */}
+          <motion.div variants={cardVariants} className="glass-card p-6 flex flex-col h-[400px]">
+             <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-foreground flex items-center gap-2">
+                <ClipboardList className="w-5 h-5 text-emerald-500" /> Recent Assessments
+              </h3>
+              <button
+                onClick={() => setShowAssessmentModal(true)}
+                className="text-xs font-semibold bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-500 px-3 py-1.5 rounded-lg transition-colors border border-emerald-500/30"
+              >
+                + Assign
+              </button>
+            </div>
+            <div className="flex-1 overflow-auto pr-2 space-y-3 custom-scrollbar">
+              {assessments.length === 0 ? (
+                <div className="text-center text-foreground/50 text-sm mt-10">
+                  No assessments assigned yet.
+                </div>
+              ) : (
+                assessments.map(assessment => (
+                  <div key={assessment.id} className="bg-black/5 dark:bg-white/5 p-4 rounded-xl border border-black/10 dark:border-white/10 flex flex-col gap-2">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-semibold text-foreground text-sm">{assessment.studentName}</p>
+                        <p className="text-xs text-foreground/50">{assessment.title}</p>
+                      </div>
+                      <span className="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-md text-xs font-bold border border-emerald-500/20">
+                        {assessment.score} / {assessment.maxScore}
+                      </span>
+                    </div>
+                    {assessment.feedback && (
+                      <p className="text-xs text-foreground/70 bg-black/5 dark:bg-white/5 p-2 rounded-lg italic">
+                        "{assessment.feedback}"
+                      </p>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* ── Right Column: Reminders & Timeline ───────────────────────────── */}
@@ -602,6 +691,109 @@ export const CoachDashboard = () => {
         )}
       </AnimatePresence>
 
+      {/* ── Add Assessment Modal ───────────────────────────────────────── */}
+      <AnimatePresence>
+        {showAssessmentModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} 
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+              onClick={() => setShowAssessmentModal(false)}
+            />
+            <motion.div 
+              variants={modalVariants} initial="hidden" animate="visible" exit="exit"
+              className="relative w-full max-w-md bg-card border border-black/10 dark:border-white/10 rounded-2xl p-6 shadow-2xl overflow-y-auto max-h-[90vh] custom-scrollbar"
+            >
+              <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <ClipboardList className="w-5 h-5 text-emerald-500" /> Assign Assessment
+              </h3>
+              <form onSubmit={handleAddAssessment} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Student</label>
+                  <select 
+                    value={assessmentStudentId}
+                    onChange={(e) => setAssessmentStudentId(e.target.value)}
+                    required
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  >
+                    <option value="" disabled className="text-foreground/50">Select student</option>
+                    {students.map(s => (
+                      <option key={s.id} value={s.id} className="bg-background text-foreground">
+                        {s.firstName} {s.lastName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Assessment Title</label>
+                  <input 
+                    type="text" 
+                    value={assessmentTitle}
+                    onChange={(e) => setAssessmentTitle(e.target.value)}
+                    required
+                    placeholder="e.g., Batting Technique, Fitness Test"
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <label className="block text-sm font-semibold mb-1.5 text-primary">Score</label>
+                    <input 
+                      type="number" 
+                      value={assessmentScore}
+                      onChange={(e) => setAssessmentScore(e.target.value)}
+                      required
+                      min="0"
+                      step="0.5"
+                      placeholder="85"
+                      className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-semibold mb-1.5 text-primary">Max Score</label>
+                    <input 
+                      type="number" 
+                      value={assessmentMaxScore}
+                      onChange={(e) => setAssessmentMaxScore(e.target.value)}
+                      required
+                      min="1"
+                      step="1"
+                      placeholder="100"
+                      className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5 text-primary">Feedback (Optional)</label>
+                  <textarea 
+                    value={assessmentFeedback}
+                    onChange={(e) => setAssessmentFeedback(e.target.value)}
+                    rows={3}
+                    placeholder="Great footwork, needs improvement on follow-through..."
+                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 resize-none"
+                  />
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <button 
+                    type="button"
+                    onClick={() => setShowAssessmentModal(false)}
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-foreground bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit"
+                    disabled={addingAssessment}
+                    className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-emerald-500 hover:bg-emerald-600 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center disabled:opacity-70"
+                  >
+                    {addingAssessment ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Assign'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

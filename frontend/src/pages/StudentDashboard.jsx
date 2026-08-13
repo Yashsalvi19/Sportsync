@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import {
   Trophy, CreditCard, CalendarCheck, ChevronRight,
-  Star, User, AlertCircle, CheckCircle2, Clock, Flame
+  Star, User, AlertCircle, CheckCircle2, Clock, Flame, ClipboardList
 } from 'lucide-react';
 import {
   RadialBarChart, RadialBar, PieChart, Pie, Cell,
@@ -210,7 +210,18 @@ export const StudentDashboard = () => {
     }
   });
 
-  const loading = attLoading || feesLoading || tourLoading;
+  // Fetch Assessments
+  const { data: assessmentsData, isLoading: assLoading } = useQuery({
+    queryKey: ['studentAssessments', studentId],
+    queryFn: async () => {
+      if (!studentId) return [];
+      const res = await apiClient.get(`/assessments/student/${studentId}`);
+      return res.data.data || [];
+    },
+    enabled: !!studentId
+  });
+
+  const loading = attLoading || feesLoading || tourLoading || assLoading;
 
   if (loading) {
     return (
@@ -365,28 +376,41 @@ export const StudentDashboard = () => {
           </div>
         </motion.div>
 
-        {/* Monthly Score Bar Chart */}
-        <motion.div variants={cardVariants} className="glass-card p-6 lg:col-span-2">
+        {/* Assessments List */}
+        <motion.div variants={cardVariants} className="glass-card p-6 lg:col-span-2 flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-bold text-foreground text-sm">Monthly Assessment Scores</h3>
-              <p className="text-xs text-foreground/50 mt-0.5">Performance across last 6 months</p>
+              <h3 className="font-bold text-foreground text-sm">Recent Assessments</h3>
+              <p className="text-xs text-foreground/50 mt-0.5">Feedback and scores from your coaches</p>
             </div>
-            <Star className="w-4 h-4 text-[#9C57F3]" />
+            <ClipboardList className="w-4 h-4 text-[#9C57F3]" />
           </div>
-          <ResponsiveContainer width="100%" height={185}>
-            <BarChart data={monthlyScores} barSize={28}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
-              <XAxis dataKey="month" stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 11 }} domain={[50, 100]} axisLine={false} tickLine={false} />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.05)', radius: 8 }} />
-              <Bar dataKey="score" name="Score" radius={[6, 6, 0, 0]}>
-                {monthlyScores.map((entry, idx) => (
-                  <Cell key={idx} fill={entry.score >= 90 ? '#22C55E' : entry.score >= 75 ? '#9C57F3' : '#F59E0B'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="flex-1 overflow-auto pr-2 space-y-3 custom-scrollbar max-h-[185px]">
+            {assessmentsData?.length > 0 ? (
+              assessmentsData.map(assessment => (
+                <div key={assessment.id} className="bg-black/5 dark:bg-white/5 p-4 rounded-xl border border-black/10 dark:border-white/10 flex flex-col gap-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-semibold text-foreground text-sm">{assessment.title}</p>
+                      <p className="text-xs text-foreground/50">Coach {assessment.coachName}</p>
+                    </div>
+                    <span className="bg-[#9C57F3]/10 text-[#9C57F3] px-2 py-1 rounded-md text-xs font-bold border border-[#9C57F3]/20">
+                      {assessment.score} / {assessment.maxScore}
+                    </span>
+                  </div>
+                  {assessment.feedback && (
+                    <p className="text-xs text-foreground/70 bg-black/5 dark:bg-white/5 p-2 rounded-lg italic">
+                      "{assessment.feedback}"
+                    </p>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="flex items-center justify-center h-full text-foreground/50 text-sm font-semibold border border-dashed border-black/10 dark:border-white/10 rounded-xl">
+                No assessments assigned yet
+              </div>
+            )}
+          </div>
         </motion.div>
       </motion.div>
 
