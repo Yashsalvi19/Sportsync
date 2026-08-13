@@ -216,45 +216,24 @@ export const StudentDashboard = () => {
     enabled: !!studentId
   });
 
-  // Dynamically compute monthly average scores from live assessments data
-  const monthlyScores = useMemo(() => {
+  // Dynamically compute date-wise scores from live assessments data
+  const datewiseScores = useMemo(() => {
     if (!assessmentsData || assessmentsData.length === 0) return [];
 
-    const scoresByMonth = {};
-    assessmentsData.forEach(ass => {
-      const date = new Date(ass.assessmentDate);
-      const monthStr = date.toLocaleString('default', { month: 'short' });
-      
-      if (!scoresByMonth[monthStr]) {
-        scoresByMonth[monthStr] = { total: 0, count: 0 };
-      }
-      
-      // Calculate percentage score (assuming maxScore might not always be 100)
-      const percentage = (ass.score / (ass.maxScore || 100)) * 100;
-      scoresByMonth[monthStr].total += percentage;
-      scoresByMonth[monthStr].count += 1;
-    });
+    // Sort assessments chronologically for the chart
+    const sorted = [...assessmentsData].sort((a, b) => new Date(a.assessmentDate) - new Date(b.assessmentDate));
 
-    // Build the array for the last 6 months to maintain chronological order in the chart
-    const result = [];
-    for (let i = 5; i >= 0; i--) {
-      const d = new Date();
-      d.setMonth(d.getMonth() - i);
-      const monthStr = d.toLocaleString('default', { month: 'short' });
+    return sorted.map(ass => {
+      const date = new Date(ass.assessmentDate);
+      const dateStr = date.toLocaleString('default', { day: '2-digit', month: 'short' });
+      // Calculate percentage score
+      const percentage = (ass.score / (ass.maxScore || 100)) * 100;
       
-      if (scoresByMonth[monthStr]) {
-        result.push({
-          month: monthStr,
-          score: Math.round(scoresByMonth[monthStr].total / scoresByMonth[monthStr].count)
-        });
-      } else {
-        result.push({
-          month: monthStr,
-          score: 0 // Default score if no assessments were given that month
-        });
-      }
-    }
-    return result;
+      return {
+        date: dateStr,
+        score: Math.round(percentage)
+      };
+    });
   }, [assessmentsData]);
 
   const loading = attLoading || feesLoading || tourLoading || assLoading;
@@ -412,28 +391,32 @@ export const StudentDashboard = () => {
           </div>
         </motion.div>
 
-        {/* Monthly Score Bar Chart */}
+        {/* Date-wise Score Bar Chart */}
         <motion.div variants={cardVariants} className="glass-card p-6 flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-bold text-foreground text-sm">Monthly Scores</h3>
-              <p className="text-xs text-foreground/50 mt-0.5">Average across last 6 months</p>
+              <h3 className="font-bold text-foreground text-sm">Assessment History</h3>
+              <p className="text-xs text-foreground/50 mt-0.5">Scores across recent assessments</p>
             </div>
             <Star className="w-4 h-4 text-[#9C57F3]" />
           </div>
-          <ResponsiveContainer width="100%" height={185}>
-            <BarChart data={monthlyScores} barSize={28}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(156, 163, 175, 0.1)" vertical={false} />
-              <XAxis dataKey="month" stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} domain={[0, 100]} axisLine={false} tickLine={false} />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(156, 163, 175, 0.05)', radius: 8 }} />
-              <Bar dataKey="score" name="Score" radius={[6, 6, 0, 0]}>
-                {monthlyScores.map((entry, idx) => (
-                  <Cell key={idx} fill={entry.score >= 90 ? '#22C55E' : entry.score >= 75 ? '#9C57F3' : entry.score > 0 ? '#F59E0B' : 'rgba(156, 163, 175, 0.1)'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="w-full overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
+            <div style={{ minWidth: `${Math.max(60 * (datewiseScores?.length || 0), 300)}px`, height: '185px' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={datewiseScores} barSize={28}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(156, 163, 175, 0.1)" vertical={false} />
+                  <XAxis dataKey="date" stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis stroke="rgba(156, 163, 175, 0.5)" tick={{ fontSize: 11 }} domain={[0, 100]} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(156, 163, 175, 0.05)', radius: 8 }} />
+                  <Bar dataKey="score" name="Score" radius={[6, 6, 0, 0]}>
+                    {datewiseScores.map((entry, idx) => (
+                      <Cell key={idx} fill={entry.score >= 90 ? '#22C55E' : entry.score >= 75 ? '#9C57F3' : entry.score > 0 ? '#F59E0B' : 'rgba(156, 163, 175, 0.1)'} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </motion.div>
 
         {/* Assessments List */}
