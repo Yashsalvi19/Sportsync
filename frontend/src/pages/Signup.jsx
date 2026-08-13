@@ -244,6 +244,10 @@ export const Signup = () => {
               Sign in
             </button>
           </div>
+          
+          <div className="mt-12 text-center text-xs font-medium text-slate-400 dark:text-slate-500">
+            &copy; {new Date().getFullYear()} The trio Org. All rights reserved.
+          </div>
         </motion.div>
       </div>
     </div>
