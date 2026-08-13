@@ -57,10 +57,14 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row font-sans">
+    <div className={`min-h-screen flex flex-col ${loginType === 'STUDENT' ? 'md:flex-row' : 'md:flex-row-reverse'} font-sans overflow-hidden bg-[#F8FAFC] dark:bg-[#0B1220]`}>
       
       {/* Visual Split - High Res Background with Glassmorphic Overlay */}
-      <div className="hidden md:flex md:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#492489] to-[#0E0236]">
+      <motion.div 
+        layout
+        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="hidden md:flex md:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#492489] to-[#0E0236]"
+      >
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay transition-all duration-1000"
           style={{ backgroundImage: loginType === 'COACH' ? 'url("/coach-bg.jpg")' : 'url("/cricket-academy.png")' }} 
@@ -69,9 +73,7 @@ export const Login = () => {
         {/* Glassmorphic Overlay with Branding */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-12">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            layout
             className="bg-black/10 dark:bg-white/10 backdrop-blur-xl border border-black/20 dark:border-white/20 p-12 rounded-3xl shadow-2xl flex flex-col items-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 border border-white/30 shadow-inner">
@@ -83,14 +85,16 @@ export const Login = () => {
             </p>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Interactive Form Half */}
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-[#F8FAFC] dark:bg-[#0B1220] p-8 relative transition-colors duration-300">
+      <motion.div 
+        layout
+        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="w-full md:w-1/2 flex items-center justify-center p-8 relative"
+      >
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          layout
           className="w-full max-w-md"
         >
           {/* Slider Toggle */}
@@ -128,7 +132,7 @@ export const Login = () => {
             </p>
           </div>
 
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {globalError && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -216,7 +220,7 @@ export const Login = () => {
             </button>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };
