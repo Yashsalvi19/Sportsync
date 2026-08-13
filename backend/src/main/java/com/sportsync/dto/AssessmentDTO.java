@@ -5,14 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AssessmentDTO {
     private Long id;
-    private Long studentId;
+    private UUID studentId;
     private String studentName;
-    private Long coachId;
+    private UUID coachId;
     private String coachName;
     private String title;
     private Double score;

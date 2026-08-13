@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +42,13 @@ public class AssessmentService {
     }
 
     @Transactional(readOnly = true)
-    public List<AssessmentDTO> getAssessmentsForStudent(Long studentId) {
+    public List<AssessmentDTO> getAssessmentsForStudent(UUID studentId) {
         return assessmentRepository.findByStudentIdOrderByAssessmentDateDesc(studentId)
                 .stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<AssessmentDTO> getAssessmentsByCoach(Long coachId) {
+    public List<AssessmentDTO> getAssessmentsByCoach(UUID coachId) {
         return assessmentRepository.findByCoachIdOrderByAssessmentDateDesc(coachId)
                 .stream().map(this::mapToDTO).collect(Collectors.toList());
     }

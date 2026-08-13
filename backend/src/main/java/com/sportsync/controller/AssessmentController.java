@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/assessments")
@@ -23,13 +24,13 @@ public class AssessmentController {
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsForStudent(@PathVariable Long studentId) {
+    public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsForStudent(@PathVariable UUID studentId) {
         List<AssessmentDTO> assessments = assessmentService.getAssessmentsForStudent(studentId);
         return ResponseEntity.ok(ApiResponse.success(assessments, "Assessments retrieved successfully"));
     }
 
     @GetMapping("/coach/{coachId}")
-    public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsByCoach(@PathVariable Long coachId) {
+    public ResponseEntity<ApiResponse<List<AssessmentDTO>>> getAssessmentsByCoach(@PathVariable UUID coachId) {
         List<AssessmentDTO> assessments = assessmentService.getAssessmentsByCoach(coachId);
         return ResponseEntity.ok(ApiResponse.success(assessments, "Assessments retrieved successfully"));
     }
