@@ -98,7 +98,7 @@ export const Sidebar = ({ mobileOpen, onClose }) => {
   return (
     <>
       {/* Desktop */}
-      <aside className="w-64 h-screen hidden md:flex flex-col bg-card backdrop-blur-md border-r border-black/10 dark:border-black/10 dark:border-white/10 fixed left-0 top-0 z-30 transition-colors duration-300">
+      <aside className="w-64 h-screen hidden md:flex flex-col bg-card backdrop-blur-md border-r border-black/10 dark:border-black/10 dark:border-white/10 fixed left-0 top-0 z-30">
         <SidebarContent />
       </aside>
 
@@ -116,7 +116,7 @@ export const Sidebar = ({ mobileOpen, onClose }) => {
               key="drawer"
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed left-0 top-0 h-full w-72 bg-card border-r border-black/10 dark:border-black/10 dark:border-white/10 z-50 flex flex-col md:hidden transition-colors duration-300"
+              className="fixed left-0 top-0 h-full w-72 bg-card border-r border-black/10 dark:border-black/10 dark:border-white/10 z-50 flex flex-col md:hidden"
             >
               <button
                 onClick={onClose}
