@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --background: #0E0236;
-    --foreground: #F5EFFC;
-    --card-bg: #0E0236; /* Match background for neumorphism */
+    --background: #E0E5EC;
+    --foreground: #1A1A1A;
+    --card-bg: #E0E5EC;
   }
 
   .dark {
-    --background: #000001;
+    --background: #0E0236;
     --foreground: #F5EFFC;
-    --card-bg: #000001; /* Match background for neumorphism */
+    --card-bg: #0E0236;
   }
 
   html, body {
@@ -33,6 +33,6 @@
   }
   
   .btn-primary {
-    @apply bg-primary text-white font-medium px-4 py-2 rounded-xl shadow-neo-primary hover:bg-primary-600 transition-all active:shadow-neo-primary-inset active:scale-[0.98];
+    @apply bg-primary text-white font-medium px-4 py-2 rounded-xl shadow-neo-primary dark:shadow-neo-primary-dark hover:bg-primary-600 transition-all active:shadow-neo-primary-inset dark:active:shadow-neo-primary-inset-dark active:scale-[0.98];
   }
 }

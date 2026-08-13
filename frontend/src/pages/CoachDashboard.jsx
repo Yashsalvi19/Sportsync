@@ -103,7 +103,7 @@ export const CoachDashboard = () => {
       navigate('/login');
       return;
     }
-    if (user?.user_metadata?.role !== 'COACH') {
+    if (user?.user_metadata?.role?.toUpperCase() !== 'COACH') {
       navigate('/dashboard');
       return;
     }
@@ -257,7 +257,7 @@ export const CoachDashboard = () => {
   }
 
   // Double check protection just in case
-  if (user?.user_metadata?.role !== 'COACH') return null;
+  if (user?.user_metadata?.role?.toUpperCase() !== 'COACH') return null;
 
   return (
     <div className="space-y-8 pb-10">
